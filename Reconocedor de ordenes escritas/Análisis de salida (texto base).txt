@@ -1,0 +1,239 @@
+Python 3.6.7rc1 (v3.6.7rc1:311101f7b6, Sep 26 2018, 15:43:06) [MSC v.1900 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+>>> 
+ RESTART: G:\Peles\estudis\Master Tecnologies del Llenguatge\ASSIGNATURES\Procesamiento del lenguaje natural\tareas\Segunda práctica - Sintaxis - Fecha de entrega 4 de marzo\DEFINITIVO\programa_base - Python3.6.py 
+enciendete
+
+(S[SEM=[ACCION='conectar']]
+  (SV[ACCION='conectar', COMP='no']
+    (V[ACCION='conectar', COMP='no'] enciendete)))
+conectate
+
+(S[SEM=[ACCION='conectar']]
+  (SV[ACCION='conectar', COMP='no']
+    (V[ACCION='conectar', COMP='no'] conectate)))
+desconectate
+
+(S[SEM=[ACCION='desconectar']]
+  (SV[ACCION='desconectar', COMP='no']
+    (V[ACCION='desconectar', COMP='no'] desconectate)))
+apagate
+
+(S[SEM=[ACCION='desconectar']]
+  (SV[ACCION='desconectar', COMP='no']
+    (V[ACCION='desconectar', COMP='no'] apagate)))
+parate
+
+(S[SEM=[ACCION='parar']]
+  (SV[ACCION='parar', COMP='no']
+    (V[ACCION='parar', COMP='no'] parate)))
+detente
+
+(S[SEM=[ACCION='parar']]
+  (SV[ACCION='parar', COMP='no']
+    (V[ACCION='parar', COMP='no'] detente)))
+parar
+
+(S[SEM=[ACCION='parar']]
+  (SV[ACCION='parar', COMP='no']
+    (V[ACCION='parar', COMP='no'] parar)))
+avanza
+
+(S[SEM=[ACCION='avanzar', DISTANCIA=?d, VELOCIDAD=?v]]
+  (SV[ACCION='avanzar', COMP='si']
+    (V[ACCION='avanzar', COMP='si'] avanza)))
+avanza cuatro centimetros
+
+(S[SEM=[ACCION='avanzar', DISTANCIA=[CANTIDAD='cuatro', UNIDAD='centimetro'], VELOCIDAD=?v]]
+  (SV[ACCION='avanzar', COMP='si', DISTANCIA=[CANTIDAD='cuatro', UNIDAD='centimetro']]
+    (V[ACCION='avanzar', COMP='si'] avanza)
+    (SN[CANTIDAD='cuatro', OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='centimetro']
+      (Det[CANTIDAD='cuatro'] cuatro)
+      (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='centimetro']
+        (N[TIPO='distancia', UNIDAD='centimetro'] centimetros)))))
+avanzar diez metros a tres centimetros por segundo
+
+(S[SEM=[ACCION='avanzar', DISTANCIA=[CANTIDAD='diez', UNIDAD='metro'], VELOCIDAD=[CANTIDAD='tres', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]]]
+  (SV[ACCION='avanzar', COMP='si', DISTANCIA=[CANTIDAD='diez', UNIDAD='metro'], VELOCIDAD=[CANTIDAD='tres', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]]
+    (V[ACCION='avanzar', COMP='si'] avanzar)
+    (SN[CANTIDAD='diez', OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='metro']
+      (Det[CANTIDAD='diez'] diez)
+      (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='metro']
+        (N[TIPO='distancia', UNIDAD='metro'] metros)))
+    (SP[CANTIDAD='tres', OBJETO='velocidad', PREGUNTA=?q, SENTIDO=?s, TIPO='velocidad', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]
+      (Prep[TIPO='a'] a)
+      (SN[CANTIDAD='tres', OBJETO=?o, PREGUNTA=?q, SENTIDO=?s, TIPO='velocidad', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]
+        (Det[CANTIDAD='tres'] tres)
+        (Nominal[TIPO='velocidad', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]
+          (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='centimetro']
+            (N[TIPO='distancia', UNIDAD='centimetro'] centimetros))
+          (SP[TIPO='tiempo', UNIDAD='segundo']
+            (Prep[TIPO='por'] por)
+            (Nominal[OBJETO='tiempo', PREGUNTA=?q, SENTIDO=?s, TIPO='tiempo', UNIDAD='segundo']
+              (N[TIPO='tiempo', UNIDAD='segundo'] segundo))))))))
+avanzar a tres centimetros por segundo diez metros
+
+(S[SEM=[ACCION='avanzar', DISTANCIA=[CANTIDAD='diez', UNIDAD='metro'], VELOCIDAD=[CANTIDAD='tres', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]]]
+  (SV[ACCION='avanzar', COMP='si', DISTANCIA=[CANTIDAD='diez', UNIDAD='metro'], VELOCIDAD=[CANTIDAD='tres', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]]
+    (V[ACCION='avanzar', COMP='si'] avanzar)
+    (SP[CANTIDAD='tres', OBJETO='velocidad', PREGUNTA=?q, SENTIDO=?s, TIPO='velocidad', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]
+      (Prep[TIPO='a'] a)
+      (SN[CANTIDAD='tres', OBJETO=?o, PREGUNTA=?q, SENTIDO=?s, TIPO='velocidad', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]
+        (Det[CANTIDAD='tres'] tres)
+        (Nominal[TIPO='velocidad', UNIDAD=[DISTANCIA='centimetro', TIEMPO='segundo']]
+          (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='centimetro']
+            (N[TIPO='distancia', UNIDAD='centimetro'] centimetros))
+          (SP[TIPO='tiempo', UNIDAD='segundo']
+            (Prep[TIPO='por'] por)
+            (Nominal[OBJETO='tiempo', PREGUNTA=?q, SENTIDO=?s, TIPO='tiempo', UNIDAD='segundo']
+              (N[TIPO='tiempo', UNIDAD='segundo'] segundo))))))
+    (SN[CANTIDAD='diez', OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='metro']
+      (Det[CANTIDAD='diez'] diez)
+      (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='metro']
+        (N[TIPO='distancia', UNIDAD='metro'] metros)))))
+desplazate tres metros a cinco metros por segundo
+
+(S[SEM=[ACCION='avanzar', DISTANCIA=[CANTIDAD='tres', UNIDAD='metro'], VELOCIDAD=[CANTIDAD='cinco', UNIDAD=[DISTANCIA='metro', TIEMPO='segundo']]]]
+  (SV[ACCION='avanzar', COMP='si', DISTANCIA=[CANTIDAD='tres', UNIDAD='metro'], VELOCIDAD=[CANTIDAD='cinco', UNIDAD=[DISTANCIA='metro', TIEMPO='segundo']]]
+    (V[ACCION='avanzar', COMP='si'] desplazate)
+    (SN[CANTIDAD='tres', OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='metro']
+      (Det[CANTIDAD='tres'] tres)
+      (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='metro']
+        (N[TIPO='distancia', UNIDAD='metro'] metros)))
+    (SP[CANTIDAD='cinco', OBJETO='velocidad', PREGUNTA=?q, SENTIDO=?s, TIPO='velocidad', UNIDAD=[DISTANCIA='metro', TIEMPO='segundo']]
+      (Prep[TIPO='a'] a)
+      (SN[CANTIDAD='cinco', OBJETO=?o, PREGUNTA=?q, SENTIDO=?s, TIPO='velocidad', UNIDAD=[DISTANCIA='metro', TIEMPO='segundo']]
+        (Det[CANTIDAD='cinco'] cinco)
+        (Nominal[TIPO='velocidad', UNIDAD=[DISTANCIA='metro', TIEMPO='segundo']]
+          (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='metro']
+            (N[TIPO='distancia', UNIDAD='metro'] metros))
+          (SP[TIPO='tiempo', UNIDAD='segundo']
+            (Prep[TIPO='por'] por)
+            (Nominal[OBJETO='tiempo', PREGUNTA=?q, SENTIDO=?s, TIPO='tiempo', UNIDAD='segundo']
+              (N[TIPO='tiempo', UNIDAD='segundo'] segundo))))))))
+camina diez centimetros a tres kilometros por hora
+
+(S[SEM=[ACCION='avanzar', DISTANCIA=[CANTIDAD='diez', UNIDAD='centimetro'], VELOCIDAD=[CANTIDAD='tres', UNIDAD=[DISTANCIA='kilometro', TIEMPO='hora']]]]
+  (SV[ACCION='avanzar', COMP='si', DISTANCIA=[CANTIDAD='diez', UNIDAD='centimetro'], VELOCIDAD=[CANTIDAD='tres', UNIDAD=[DISTANCIA='kilometro', TIEMPO='hora']]]
+    (V[ACCION='avanzar', COMP='si'] camina)
+    (SN[CANTIDAD='diez', OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='centimetro']
+      (Det[CANTIDAD='diez'] diez)
+      (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='centimetro']
+        (N[TIPO='distancia', UNIDAD='centimetro'] centimetros)))
+    (SP[CANTIDAD='tres', OBJETO='velocidad', PREGUNTA=?q, SENTIDO=?s, TIPO='velocidad', UNIDAD=[DISTANCIA='kilometro', TIEMPO='hora']]
+      (Prep[TIPO='a'] a)
+      (SN[CANTIDAD='tres', OBJETO=?o, PREGUNTA=?q, SENTIDO=?s, TIPO='velocidad', UNIDAD=[DISTANCIA='kilometro', TIEMPO='hora']]
+        (Det[CANTIDAD='tres'] tres)
+        (Nominal[TIPO='velocidad', UNIDAD=[DISTANCIA='kilometro', TIEMPO='hora']]
+          (Nominal[OBJETO='distancia', PREGUNTA=?q, SENTIDO=?s, TIPO='distancia', UNIDAD='kilometro']
+            (N[TIPO='distancia', UNIDAD='kilometro'] kilometros))
+          (SP[TIPO='tiempo', UNIDAD='hora']
+            (Prep[TIPO='por'] por)
+            (Nominal[OBJETO='tiempo', PREGUNTA=?q, SENTIDO=?s, TIPO='tiempo', UNIDAD='hora']
+              (N[TIPO='tiempo', UNIDAD='hora'] hora))))))))
+gira
+
+(S[SEM=[ACCION='girar', ANGULO=?a, SENTIDO=?s]]
+  (SV[ACCION='girar', COMP='si'] (V[ACCION='girar', COMP='si'] gira)))
+gira cinco grados
+
+(S[SEM=[ACCION='girar', ANGULO=[CANTIDAD='cinco', UNIDAD='grado'], SENTIDO=?s]]
+  (SV[ACCION='girar', ANGULO=[CANTIDAD='cinco', UNIDAD='grado'], COMP='si']
+    (V[ACCION='girar', COMP='si'] gira)
+    (SN[CANTIDAD='cinco', OBJETO='angulo', PREGUNTA=?q, SENTIDO=?s, TIPO='angulo', UNIDAD='grado']
+      (Det[CANTIDAD='cinco'] cinco)
+      (Nominal[OBJETO='angulo', PREGUNTA=?q, SENTIDO=?s, TIPO='angulo', UNIDAD='grado']
+        (N[TIPO='angulo', UNIDAD='grado'] grados)))))
+girar tres grados a la derecha
+
+(S[SEM=[ACCION='girar', ANGULO=[CANTIDAD='tres', UNIDAD='grado'], SENTIDO='derecha']]
+  (SV[ACCION='girar', ANGULO=[CANTIDAD='tres', UNIDAD='grado'], COMP='si', SENTIDO='derecha']
+    (V[ACCION='girar', COMP='si'] girar)
+    (SN[CANTIDAD='tres', OBJETO='angulo', PREGUNTA=?q, SENTIDO=?s, TIPO='angulo', UNIDAD='grado']
+      (Det[CANTIDAD='tres'] tres)
+      (Nominal[OBJETO='angulo', PREGUNTA=?q, SENTIDO=?s, TIPO='angulo', UNIDAD='grado']
+        (N[TIPO='angulo', UNIDAD='grado'] grados)))
+    (SP[CANTIDAD=?c, OBJETO='sentido', PREGUNTA=?q, SENTIDO='derecha', TIPO='sentido', UNIDAD=?u]
+      (Prep[TIPO='a'] a)
+      (SN[CANTIDAD=?c, OBJETO='sentido', PREGUNTA=?q, SENTIDO='derecha', TIPO='sentido', UNIDAD=?u]
+        (Det[] la)
+        (Nominal[OBJETO='sentido', PREGUNTA=?q, SENTIDO='derecha', TIPO='sentido', UNIDAD=?u]
+          (N[SENTIDO='derecha', TIPO='sentido'] derecha))))))
+gira a la izquierda
+
+(S[SEM=[ACCION='girar', ANGULO=?a, SENTIDO='izquierda']]
+  (SV[ACCION='girar', COMP='si', SENTIDO='izquierda']
+    (V[ACCION='girar', COMP='si'] gira)
+    (SP[CANTIDAD=?c, OBJETO='sentido', PREGUNTA=?q, SENTIDO='izquierda', TIPO='sentido', UNIDAD=?u]
+      (Prep[TIPO='a'] a)
+      (SN[CANTIDAD=?c, OBJETO='sentido', PREGUNTA=?q, SENTIDO='izquierda', TIPO='sentido', UNIDAD=?u]
+        (Det[] la)
+        (Nominal[OBJETO='sentido', PREGUNTA=?q, SENTIDO='izquierda', TIPO='sentido', UNIDAD=?u]
+          (N[SENTIDO='izquierda', TIPO='sentido'] izquierda))))))
+dime el estado de tu bateria
+
+(S[SEM=[ACCION='informar', OBJETO='bateria', PERSONA=?p, PREGUNTA='cantidad']]
+  (SV[ACCION='informar', COMP='si', OBJETO='bateria', PREGUNTA='cantidad', TIPO=?t]
+    (V[ACCION='informar', COMP='si'] dime)
+    (SN[CANTIDAD=?c, OBJETO='bateria', PREGUNTA='cantidad', SENTIDO=?s, TIPO=?x, UNIDAD=?u]
+      (Det[] el)
+      (Nominal[OBJETO='bateria', PREGUNTA='cantidad']
+        (Nominal[OBJETO='cantidad', PREGUNTA=?q, SENTIDO=?s, TIPO='cantidad', UNIDAD=?u]
+          (N[TIPO='cantidad'] estado))
+        (SP[OBJETO='bateria', TIPO='pregunta_objeto']
+          (Prep[TIPO='de'] de)
+          (SN[CANTIDAD=?c, OBJETO='bateria', PREGUNTA=?q, SENTIDO=?s, TIPO='bateria', UNIDAD=?u]
+            (Det[] tu)
+            (Nominal[OBJETO='bateria', PREGUNTA=?q, SENTIDO=?s, TIPO='bateria', UNIDAD=?u]
+              (N[TIPO='bateria'] bateria))))))))
+dime cuanta bateria te queda
+
+(S[SEM=[ACCION='informar', OBJETO='bateria', PERSONA=[[NUMERO='sg', PERSONA=2]], PREGUNTA='cantidad']]
+  (SV[ACCION='informar', COMP='si', OBJETO='bateria', PERSONA=[[NUMERO='sg', PERSONA=2]], PREGUNTA='cantidad', TIPO=?t]
+    (V[ACCION='informar', COMP='si'] dime)
+    (S[SEM=[ACCION='informar', OBJETO='bateria', PERSONA=[[NUMERO='sg', PERSONA=2]], PREGUNTA='cantidad']]
+      (SN[OBJETO='bateria', PREGUNTA='cantidad']
+        (Int[PREGUNTA='cantidad'] cuanta)
+        (Nominal[OBJETO='bateria', PREGUNTA=?q, SENTIDO=?s, TIPO='bateria', UNIDAD=?u]
+          (N[TIPO='bateria'] bateria)))
+      (SV[ACCION=?a, COMP=?co, OBJETO=?o, PERSONA=[[NUMERO='sg', PERSONA=2]], TIPO=?t]
+        (PP[NUMERO='sg', PERSONA=2] te)
+        (SV[ACCION=?a, COMP=?co] (V[] queda))))))
+indica el estado de tu bateria
+
+(S[SEM=[ACCION='informar', OBJETO='bateria', PERSONA=?p, PREGUNTA='cantidad']]
+  (SV[ACCION='informar', COMP='si', OBJETO='bateria', PREGUNTA='cantidad', TIPO=?t]
+    (V[ACCION='informar', COMP='si'] indica)
+    (SN[CANTIDAD=?c, OBJETO='bateria', PREGUNTA='cantidad', SENTIDO=?s, TIPO=?x, UNIDAD=?u]
+      (Det[] el)
+      (Nominal[OBJETO='bateria', PREGUNTA='cantidad']
+        (Nominal[OBJETO='cantidad', PREGUNTA=?q, SENTIDO=?s, TIPO='cantidad', UNIDAD=?u]
+          (N[TIPO='cantidad'] estado))
+        (SP[OBJETO='bateria', TIPO='pregunta_objeto']
+          (Prep[TIPO='de'] de)
+          (SN[CANTIDAD=?c, OBJETO='bateria', PREGUNTA=?q, SENTIDO=?s, TIPO='bateria', UNIDAD=?u]
+            (Det[] tu)
+            (Nominal[OBJETO='bateria', PREGUNTA=?q, SENTIDO=?s, TIPO='bateria', UNIDAD=?u]
+              (N[TIPO='bateria'] bateria))))))))
+cuanta carga te queda
+
+(S[SEM=[ACCION='informar', OBJETO='bateria', PERSONA=[[NUMERO='sg', PERSONA=2]], PREGUNTA='cantidad']]
+  (SN[OBJETO='bateria', PREGUNTA='cantidad']
+    (Int[PREGUNTA='cantidad'] cuanta)
+    (Nominal[OBJETO='bateria', PREGUNTA=?q, SENTIDO=?s, TIPO='bateria', UNIDAD=?u]
+      (N[TIPO='bateria'] carga)))
+  (SV[ACCION=?a, COMP=?co, OBJETO=?o, PERSONA=[[NUMERO='sg', PERSONA=2]], TIPO=?t]
+    (PP[NUMERO='sg', PERSONA=2] te)
+    (SV[ACCION=?a, COMP=?co] (V[] queda))))
+cuanto te queda de bateria
+(S[SEM=[ACCION='informar', OBJETO='bateria', PERSONA=[[NUMERO='sg', PERSONA=2]], PREGUNTA='cantidad']]
+  (SN[PREGUNTA='cantidad'] (Int[PREGUNTA='cantidad'] cuanto))
+  (SV[ACCION='informar', COMP=?co, OBJETO='bateria', PERSONA=[[NUMERO='sg', PERSONA=2]], TIPO='bateria']
+    (PP[NUMERO='sg', PERSONA=2] te)
+    (SV[ACCION='informar', COMP=?co, OBJETO='bateria', PREGUNTA=?q, TIPO='bateria']
+      (V[] queda)
+      (SP[TIPO='bateria', UNIDAD=?u]
+        (Prep[TIPO='de'] de)
+        (Nominal[OBJETO='bateria', PREGUNTA=?q, SENTIDO=?s, TIPO='bateria', UNIDAD=?u]
+          (N[TIPO='bateria'] bateria))))))
+>>> 

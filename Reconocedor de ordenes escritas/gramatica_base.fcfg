@@ -1,0 +1,160 @@
+% start S
+
+# ###################
+# REGLAS GRAMATICALES
+# ###################
+
+# ORDENES FINALES #########
+# ?????????????????????????
+# ? Generamos una regla final para cada tipo de acción, ya que para cada una de ellas la variable SEM incluirá rasgos distintos
+# ?????????????????????????
+
+S[SEM=[ACCION=?a]] -> SV[ACCION=?a, COMP=no] 
+S[SEM=[ACCION=girar, ANGULO=?a, SENTIDO=?s]] -> SV[ACCION=girar, ANGULO=?a, SENTIDO=?s]
+S[SEM=[ACCION=avanzar, DISTANCIA=?d, VELOCIDAD=?v]] -> SV[ACCION=avanzar, DISTANCIA=?d, VELOCIDAD=?v]
+S[SEM=[ACCION=informar, PREGUNTA=?q, OBJETO=?o, PERSONA=?p]] -> SV[ACCION=informar, PREGUNTA=?q, OBJETO=?o, PERSONA=?p]
+
+# Estructura interrogativa 
+# ?????????????????????????
+# ? Al ser preguntas, la acción siempre es ACCION=informar. A diferencia de los otros casos, aquí esta característica se impone por la estructura de la frase
+# ? El rasgo OBJETO se coje del SN interrogativo, si la frase es del tipo "cuanta batería queda", o del SV, si es del tipo "cuanto (te) queda de bateria"
+# ?????????????????????????
+
+S[SEM=[ACCION=informar, PREGUNTA=?q, OBJETO=?o, PERSONA=?p]] -> SN[PREGUNTA=?q, OBJETO=?o] SV[PERSONA=?p, OBJETO=?o]
+
+# SINTAGMAS VERBALES (SV) #########
+
+# Acciones sin atributos ("complementos")
+#?????????????????????????
+#? No exigimos COMP=si para aceptar acciones que aceptan atributos pero los tienen vacíos ("avanza", "gira")
+#?????????????????????????
+
+SV[ACCION=?a, COMP=?co] -> V[ACCION=?a, COMP=?co]
+
+# Mover
+SV[ACCION=girar, COMP=?co, ANGULO=[CANTIDAD=?c, UNIDAD=?u]] -> V[ACCION=girar, COMP=?co] SN[TIPO=angulo, CANTIDAD=?c, UNIDAD=?u]
+SV[ACCION=girar, COMP=?co, SENTIDO=?s] -> V[ACCION=girar, COMP=?co] SP[TIPO=sentido,SENTIDO=?s] 
+SV[ACCION=girar, COMP=?co, ANGULO=[CANTIDAD=?c, UNIDAD=?u], SENTIDO=?s] -> V[ACCION=girar, COMP=?co] SN[TIPO=angulo, CANTIDAD=?c, UNIDAD=?u] SP[TIPO=sentido,SENTIDO=?s] 
+SV[ACCION=girar, COMP=?co, ANGULO=[CANTIDAD=?c, UNIDAD=?u], SENTIDO=?s] -> V[ACCION=girar, COMP=?co] SP[TIPO=sentido,SENTIDO=?s] SN[TIPO=angulo, CANTIDAD=?c, UNIDAD=?u]
+SV[ACCION=avanzar, COMP=?co, DISTANCIA=[CANTIDAD=?c, UNIDAD=?u]] -> V[ACCION=avanzar, COMP=?co] SN[TIPO=distancia, CANTIDAD=?c, UNIDAD=?u]
+SV[ACCION=avanzar, COMP=?co, VELOCIDAD=[CANTIDAD=?c, UNIDAD=?u]] -> V[ACCION=avanzar, COMP=?co] SP[TIPO=velocidad, CANTIDAD=?c, UNIDAD=?u]
+SV[ACCION=avanzar, COMP=?co, DISTANCIA=[CANTIDAD=?c1, UNIDAD=?u1], VELOCIDAD=[CANTIDAD=?c2, UNIDAD=?u2]] -> V[ACCION=avanzar, COMP=?co] SN[TIPO=distancia, CANTIDAD=?c1, UNIDAD=?u1] SP[TIPO=velocidad, CANTIDAD=?c2, UNIDAD=?u2]
+SV[ACCION=avanzar, COMP=?co, DISTANCIA=[CANTIDAD=?c1, UNIDAD=?u1], VELOCIDAD=[CANTIDAD=?c2, UNIDAD=?u2]] -> V[ACCION=avanzar, COMP=?co] SP[TIPO=velocidad, CANTIDAD=?c2, UNIDAD=?u2] SN[TIPO=distancia, CANTIDAD=?c1, UNIDAD=?u1]
+
+# Informar
+SV[ACCION=informar, COMP=si, TIPO=?t, PREGUNTA=?q, OBJETO=?o] -> V[ACCION=informar, COMP=si] SN[TIPO=?t, PREGUNTA=?q, OBJETO=?o]
+SV[ACCION=informar, COMP=?co, TIPO=?t, PREGUNTA=?q, OBJETO=?t] -> V[ACCION=informar, COMP=si] SP[TIPO=?t]
+SV[ACCION=informar, COMP=?s, TIPO=?t, PREGUNTA=?q, OBJETO=?o, PERSONA=?p] -> V[ACCION=informar, COMP=?s] S[SEM=[TIPO=?t, PREGUNTA=?q, OBJETO=?o, PERSONA=?p]] 
+
+# Aceptar pronombres personales delante ("te queda")
+#?????????????????????????
+#? Aunque formalmente un pronombre personal tendría que estar integrado dentro de un constituyente del tipo SN,
+#? en el caso que nos ocupa esto nos impediría diferenciar, a niveles superiores, tipos de objeto que nos interesa diferenciar.
+#? Si quisieramos tratar la gramática de forma más adecuada formalmente, podríamos definir una nueva subcategoría para diferenciar este tipo de SN.
+#?????????????????????????
+
+SV[ACCION=?a, COMP=?co, TIPO=?t, OBJETO=?o, PERSONA=[[PERSONA=?p, NUMERO=?n]]] -> PP[PERSONA=?p, NUMERO=?n] SV[ACCION=?a, COMP=?co, TIPO=?t, OBJETO=?o]
+
+
+# SINTAGMAS PREPOSICIONALES (SP) #########
+#?????????????????????????
+#? Formalmente, un SP debería generarse a partir de un SN, no a partir de un nominal
+#? Sin embargo, nuestra gramática tiene solo fines prácticos, y tanto SN como SP se definen semánticamente como constituyentes que aportan algún significado cerrado.
+#? Así, la primera regla SP -> prep SN se ha creado para reproducir estructuras como "a cinco metros por segundo",
+#? mientras que la segunda, SP -> prep Nominal se refiere a "por segundo"
+#?????????????????????????
+
+SP[CANTIDAD=?c, TIPO=?t, UNIDAD=?u, SENTIDO=?s, PREGUNTA=?q, OBJETO=?t] -> Prep SN[CANTIDAD=?c, TIPO=?t, UNIDAD=?u, SENTIDO=?s,PREGUNTA=?q]
+SP[TIPO=?t, UNIDAD=?u] -> Prep Nominal[TIPO=?t, UNIDAD=?u] 
+
+# Pregunta-objeto
+SP[TIPO=pregunta_objeto, OBJETO=?o] -> Prep[TIPO=de] SN[TIPO=?o] 
+
+
+# SINTAGMAS NOMINALES (SN) #########
+#?????????????????????????
+#? Por razones prácticas, definimos SN como un constituyente semánticamente cerrado, es decir, que incorpora información
+#? en forma de determinante o pronombre interrogativo ("dos metros", "cuanta batería", "cuanto")
+#?????????????????????????
+
+SN[CANTIDAD=?c, TIPO=?x, UNIDAD=?u, SENTIDO=?s, PREGUNTA=?q, OBJETO=?o] -> Det[CANTIDAD=?c] Nominal[TIPO=?x, UNIDAD=?u, SENTIDO=?s,PREGUNTA=?q, OBJETO=?o]
+SN[PREGUNTA=?q, OBJETO=?t] -> Int[PREGUNTA=?q] Nominal[TIPO=?t]
+SN[PREGUNTA=?q] -> Int[PREGUNTA=?q]
+
+# SINTAGMAS NOMINALES (SN) #########
+#?????????????????????????
+#? Siguiendo con los criterios anteriores, hemos considerado "nominales" aquellas estructuras nominales no precedidas de 
+#? de determinante o pronombre interrogativo, aunque esto no sea formalmente correcto para la lengua española.
+#?????????????????????????
+
+Nominal[TIPO=?t, UNIDAD=?u, SENTIDO=?s, PREGUNTA=?q, OBJETO=?t] ->  N[TIPO=?t, UNIDAD=?u, SENTIDO=?s]
+
+# Velocidad (igual que "metro" es un nominal de tipo "distancia", definimos "metro por segundo" como un nominal tipo "velocidad"
+
+Nominal[TIPO=velocidad, UNIDAD=[DISTANCIA=?d, TIEMPO=?t]] -> Nominal[TIPO=distancia, UNIDAD=?d] SP[TIPO=tiempo, UNIDAD=?t]
+
+# Pregunta-objeto
+
+Nominal[PREGUNTA=?q, OBJETO=?o] -> Nominal[TIPO=?q] SP[TIPO=pregunta_objeto, OBJETO=?o] 
+
+
+# ###################
+# LÉXICO
+# ###################
+
+# Acciones que no requieren atributos
+
+V[ACCION=conectar, COMP=no] -> 'enciendete' | 'encender' | 'enciendes' | 'conectate' | 'conectar' | 'conectas'
+V[ACCION=desconectar, COMP=no] ->  'desconectate' | 'desconectar' | 'desconectas' | 'apagate' | 'apagar' | 'apagas'
+V[ACCION=parar, COMP=no] -> 'parate' | 'parar' | 'paras' |  'detente' | 'detenerte' 'detienes'
+
+
+# Acciones que requieren atributos
+
+V[ACCION=avanzar, COMP=si] -> 'avanza' | 'avanzar' |  'avanzas' | 'camina' | 'caminar' | 'caminas' | 'desplazate' | 'desplazar' | 'desplazas' 
+V[ACCION=girar, COMP=si] ->  'gira' | 'girar' | 'giras'
+V[ACCION=informar, COMP=si] -> 'dime' | 'di' | 'decir' | 'indica' | 'indicas' | 'indicame'
+V -> 'queda'
+
+# Nombres
+
+N[TIPO=distancia, UNIDAD=centimetro] -> 'centimetro' | 'centimetros'
+N[TIPO=distancia, UNIDAD=metro] -> 'metro' |'metros'
+N[TIPO=distancia, UNIDAD=kilometro] -> 'kilometro' | 'kilometros' 
+N[TIPO=angulo,UNIDAD=grado] -> 'grado' | 'grados'
+N[TIPO=tiempo, UNIDAD=segundo] -> 'segundo'
+N[TIPO=tiempo, UNIDAD=hora] -> 'hora' 
+N[TIPO=sentido, SENTIDO=derecha] -> 'derecha'
+N[TIPO=sentido, SENTIDO=izquierda] -> 'izquierda'
+N[TIPO=cantidad] -> 'estado' 
+N[TIPO=bateria] -> 'carga' | 'bateria'
+
+# Numerales
+
+Det[CANTIDAD=uno] -> 'uno'
+Det[CANTIDAD=dos] -> 'dos'
+Det[CANTIDAD=tres] -> 'tres'
+Det[CANTIDAD=cuatro] -> 'cuatro'
+Det[CANTIDAD=cinco] -> 'cinco'
+Det[CANTIDAD=seis] -> 'seis'
+Det[CANTIDAD=siete] -> 'siete'
+Det[CANTIDAD=ocho] -> 'ocho'
+Det[CANTIDAD=nueve] -> 'nueve'
+Det[CANTIDAD=diez] -> 'diez'
+
+# Otros determinantes
+
+Det -> 'el' | 'la' | 'tu'
+
+# Preposiciones
+
+Prep[TIPO=a] -> 'a'
+Prep[TIPO=por] -> 'por'
+Prep[TIPO=de] -> 'de'
+
+# Pronombres
+
+PP[PERSONA=2, NUMERO=sg] -> 'te'
+Int[PREGUNTA=cantidad] -> 'cuanto' | 'cuanta'
+
+
